@@ -1,0 +1,201 @@
+version: "2.0"
+instances:
+  # redis:
+  #   run:
+  #     background: true
+  #   start:
+  #     background: true
+  #   image: docker://redis/redis-stack
+  #   options:
+  #       - fakeroot
+  #       - containall
+  #   volumes:
+  #     - ./redis_data:/data
+  #     - ./env-file.sh:/.singularity.d/env/env-file.sh
+  #   network:
+  #     enable: true
+  #     allocate_ip: true
+  #     args:
+  #       - '"portmap=6379:6379/tcp"'
+  #     ports:
+  #       - 6379:6379
+    # net:
+    #   - port_map: "6379:6379"
+
+  # yolox:
+  #   image: docker://nvcr.io/ohlfw0olaadg/ea-participants/nv-yolox-structured-images-v1:0.1.0
+  #   bind:
+  #     - $PWD/.cache:/home/nvs/.cache
+  #   net:
+  #     - port_map: "8000:8000"
+  #     - port_map: "8001:8001"
+  #     - port_map: "8002:8002"
+  #   env:
+  #     NIM_HTTP_API_PORT: "8000"
+  #     NIM_TRITON_LOG_VERBOSE: "1"
+  #     NGC_API_KEY: "${NIM_NGC_API_KEY:-${NGC_API_KEY:-ngcapikey}}"
+  #     CUDA_VISIBLE_DEVICES: "1"
+  #   gpu: true
+
+  # deplot:
+  #   image: docker://nvcr.io/ohlfw0olaadg/ea-participants/deplot:1.0.0
+  #   bind:
+  #     - $PWD/.cache:/opt/nim/.cache
+  #   net:
+  #     - port_map: "8003:8000"
+  #     - port_map: "8004:8001"
+  #     - port_map: "8005:8002"
+  #   env:
+  #     NIM_HTTP_API_PORT: "8000"
+  #     NIM_TRITON_LOG_VERBOSE: "1"
+  #     NGC_API_KEY: "${NIM_NGC_API_KEY:-${NGC_API_KEY:-ngcapikey}}"
+  #     CUDA_VISIBLE_DEVICES: "0"
+  #   gpu: true
+
+  # cached:
+  #   image: docker://nvcr.io/ohlfw0olaadg/ea-participants/cached:0.1.0
+  #   bind:
+  #     - $PWD/.cache:/home/nvs/.cache
+  #   net:
+  #     - port_map: "8006:8000"
+  #     - port_map: "8007:8001"
+  #     - port_map: "8008:8002"
+  #   env:
+  #     NIM_HTTP_API_PORT: "8000"
+  #     NIM_TRITON_LOG_VERBOSE: "1"
+  #     NGC_API_KEY: "${NIM_NGC_API_KEY:-${NGC_API_KEY:-ngcapikey}}"
+  #     CUDA_VISIBLE_DEVICES: "1"
+  #   gpu: true
+  #   options:
+  #     - "--shm-size=2g"
+
+  # paddle:
+  #   image: docker://nvcr.io/ohlfw0olaadg/ea-participants/paddleocr:0.1.0
+  #   bind:
+  #     - $PWD/.cache:/home/nvs/.cache
+  #   net:
+  #     - port_map: "8009:8000"
+  #     - port_map: "8010:8001"
+  #     - port_map: "8011:8002"
+  #   env:
+  #     NIM_HTTP_API_PORT: "8000"
+  #     NIM_TRITON_LOG_VERBOSE: "1"
+  #     NGC_API_KEY: "${NIM_NGC_API_KEY:-${NGC_API_KEY:-ngcapikey}}"
+  #     CUDA_VISIBLE_DEVICES: "1"
+  #   gpu: true
+  #   options:
+  #     - "--shm-size=2g"
+
+  # embedding:
+  #   image: docker://nvcr.io/nim/nvidia/nv-embedqa-e5-v5:1.0.1
+  #   net:
+  #     - port_map: "8012:8000"
+  #     - port_map: "8013:8001"
+  #     - port_map: "8014:8002"
+  #   env:
+  #     NIM_HTTP_API_PORT: "8000"
+  #     NIM_TRITON_LOG_VERBOSE: "1"
+  #     NGC_API_KEY: "${NIM_NGC_API_KEY:-${NGC_API_KEY:-ngcapikey}}"
+  #     CUDA_VISIBLE_DEVICES: "1"
+  #   gpu: true
+  #   options:
+  #     - "--shm-size=16g"
+
+  # nv-ingest-ms-runtime:
+  #   image: docker://nvcr.io/ohlfw0olaadg/ea-participants/nv-ingest:24.08
+  #   bind:
+  #     - ${DATASET_ROOT}:/workspace/data
+  #   net:
+  #     - port_map: "7670:7670"
+  #   env:
+  #     CACHED_GRPC_ENDPOINT: "cached:8001"
+  #     CACHED_HTTP_ENDPOINT: ""
+  #     DEPLOT_GRPC_ENDPOINT: ""
+  #     DEPLOT_HTTP_ENDPOINT: "http://deplot:8000/v1/chat/completions"
+  #     DOUGHNUT_GRPC_TRITON: "triton-doughnut:8001"
+  #     INGEST_LOG_LEVEL: "INFO"
+  #     MESSAGE_CLIENT_HOST: "redis"
+  #     MESSAGE_CLIENT_PORT: "6379"
+  #     MINIO_BUCKET: "${MINIO_BUCKET:-nv-ingest}"
+  #     NGC_API_KEY: "${NGC_API_KEY:-ngcapikey}"
+  #     NVIDIA_BUILD_API_KEY: "${NVIDIA_BUILD_API_KEY:-${NGC_API_KEY:-ngcapikey}}"
+  #     OTEL_EXPORTER_OTLP_ENDPOINT: "otel-collector:4317"
+  #     PADDLE_GRPC_ENDPOINT: "paddle:8001"
+  #     PADDLE_HTTP_ENDPOINT: ""
+  #     REDIS_MORPHEUS_TASK_QUEUE: "morpheus_task_queue"
+  #     TABLE_DETECTION_GRPC_TRITON: "yolox:8001"
+  #     TABLE_DETECTION_HTTP_TRITON: ""
+  #     YOLOX_GRPC_ENDPOINT: "yolox:8001"
+  #     YOLOX_HTTP_ENDPOINT: ""
+  #     CUDA_VISIBLE_DEVICES: "1"
+  #   gpu: true
+
+  # otel-collector:
+  #   image: docker://otel/opentelemetry-collector-contrib:0.91.0
+  #   bind:
+  #     - $PWD/config/otel-collector-config.yaml:/etc/otel-collector-config.yaml
+  #   net:
+  #     - port_map: "8888:8888"
+  #     - port_map: "8889:8889"
+  #     - port_map: "13133:13133"
+  #     - port_map: "9411:9411"
+  #     - port_map: "4317:4317"
+  #     - port_map: "4318:4318"
+  #     - port_map: "55680:55679"
+  #   command: "--config=/etc/otel-collector-config.yaml"
+
+  # zipkin:
+  #   image: docker://openzipkin/zipkin
+  #   net:
+  #     - port_map: "9411:9411"
+  #   env:
+  #     JAVA_OPTS: "-Xms2g -Xmx2g -XX:+ExitOnOutOfMemoryError"
+
+  prometheus:
+    image: docker://prom/prometheus:latest
+    volumes:
+      - ./config/prometheus.yaml:/etc/prometheus/prometheus-config.yaml
+      - /grand/datascience/atanikanti/nv-ingest:/grand/datascience/atanikanti/nv-ingest  # Bind data folder
+      - ./prometheus:/prometheus
+      - ${HOME}:${HOME}  # Bind home directory
+    run:
+      background: true
+    ports:
+      - 9090:9090
+    start:
+      options:
+       - fakeroot
+       - --contain
+
+      
+    # network:
+    #   enable: true
+    #   allocate_ip: true
+    #   args:
+    #     - '"portmap=9090:9090/tcp"'
+    #   ports:
+    #     - 9090:9090
+    # command: >-
+    #   --web.console.templates=/etc/prometheus/consoles
+    #   --web.console.libraries=/etc/prometheus/console_libraries
+    #   --storage.tsdb.retention.time=1h
+    #   --config.file=/etc/prometheus/prometheus-config.yaml
+    #   --storage.tsdb.path=/prometheus
+    #   --web.enable-lifecycle
+    #   --web.route-prefix=/
+    #   --enable-feature=exemplar-storage
+    #   --enable-feature=otlp-write-receiver
+
+  # grafana:
+  #   image: docker://grafana/grafana
+  #   run:
+  #     background: true
+  #   start:
+  #     background: true
+  #   network:
+  #     enable: true
+  #     allocate_ip: true
+  #     args:
+  #       - '"portmap=3000:3000/tcp"'
+  #     ports:
+  #       - 3000:3000
