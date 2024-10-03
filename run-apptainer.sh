@@ -132,7 +132,7 @@ apptainer instance run -C \
     $REDIS_CONTAINER \
     redis
 
-sleep 10
+sleep 5
 
 # yolox
 apptainer instance run -C \
@@ -144,7 +144,7 @@ apptainer instance run -C \
     $YOLOX_CONTAINER \
     yolox
 
-sleep 10
+sleep 5
 
 # deplot
 apptainer instance run -C \
@@ -155,7 +155,7 @@ apptainer instance run -C \
     $DEPLOT_CONTAINER \
     deplot
 
-sleep 10
+sleep 5
 
 # cached
 apptainer instance run -C \
@@ -168,7 +168,7 @@ apptainer instance run -C \
     $CACHED_CONTAINER \
     cached
 
-sleep 10
+sleep 5
 
 # paddle
 apptainer instance run -C \
@@ -180,7 +180,7 @@ apptainer instance run -C \
     $PADDLE_CONTAINER \
     paddle
 
-sleep 10
+sleep 5
 
 # embedding
 apptainer instance run -C \
@@ -193,7 +193,7 @@ apptainer instance run -C \
     $NV_EMBEDQA_CONTAINER \
     embedding
 
-sleep 10
+sleep 5
 
 # nv-ingest-ms-runtime
 apptainer instance run -C \
@@ -204,7 +204,7 @@ apptainer instance run -C \
     $NV_INGEST_CONTAINER \
     nv-ingest-ms-runtime
 
-sleep 10
+sleep 5
 
 # zipkin
 apptainer instance run -C \
@@ -213,7 +213,7 @@ apptainer instance run -C \
     $ZIPKIN_CONTAINER \
     zipkin
 
-sleep 10
+sleep 5
 
 # otel-collector
 apptainer instance run -C \
@@ -223,7 +223,7 @@ apptainer instance run -C \
     otel-collector \
     "--config=/etc/otel-collector-config.yaml"
 
-sleep 10
+sleep 5
 
 # prometheus
 apptainer instance run -C \
@@ -241,7 +241,7 @@ apptainer instance run -C \
     "--enable-feature=exemplar-storage" \
     "--enable-feature=otlp-write-receiver"
 
-sleep 10
+sleep 5
 
 # grafana
 apptainer instance run -C \
